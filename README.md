@@ -133,6 +133,22 @@ dotnet ef migrations script
 
 ``` 
 
+#### Alerta de versão do tool
+
+###### Mensagem:
+
+```
+The EF Core tools version '3.1.1' is older than that of the runtime '3.1.4'. Update the tools for the latest features and bug fixes.
+```
+
+###### Solução:
+
+```
+dotnet tool update --global dotnet-ef --version ****
+```
+
+
+
 #### Database First 
 
 ##### Fazer o scaffold de um Banco de Dados existente
@@ -143,15 +159,4 @@ Veja esse procedimento na minha página, [clicando aqui](https://developer-jr.we
 
 
 
-Erro:
 
-```
-The EF Core tools version '3.1.1' is older than that of the runtime '3.1.4'. Update the tools for the latest features and bug fixes.
-```
-
-
-Solução:
-
-```
-dotnet tool update --global dotnet-ef --version ****
-```
