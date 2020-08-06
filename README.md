@@ -101,7 +101,8 @@ public class LivrosController : Controller
 ```
 
 
-## Gerar Migrations
+
+##  Migrations
 
 #### Instalar tool do EF Core via CLI:
 
@@ -131,6 +132,14 @@ dotnet ef database update
 dotnet ef migrations script
 
 ``` 
+
+#### Database First 
+
+##### Fazer o scaffold de um Banco de Dados existente
+
+###### É o trabalhos inverso. Ou seja, gerar suas classes de domínio/modelo a partir de um banco de dados existente. 
+
+Veja esse procedimento na minha página, [clicando aqui](https://developer-jr.webnode.com/l/database-first/)
 
 
 
