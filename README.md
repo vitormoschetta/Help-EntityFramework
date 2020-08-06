@@ -149,9 +149,11 @@ dotnet tool update --global dotnet-ef --version ****
 
 
 
-#### Database First 
+## Database First 
+
 
 ##### Fazer o scaffold de um Banco de Dados existente
+
 
 ###### É o trabalhos inverso. Ou seja, gerar suas classes de domínio/modelo a partir de um banco de dados existente. 
 
