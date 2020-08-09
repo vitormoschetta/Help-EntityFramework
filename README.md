@@ -155,7 +155,9 @@ protected override void BuildModel(ModelBuilder modelBuilder)
         });
 }
 ```
-Esses arquivos contém justamente as configurações das propriedades que irão constituir a Tabela do Banco de Dados. 
+Esses arquivos contém justamente as configurações das propriedades que irão constituir a Tabela do Banco de Dados. Você pode configurar o nome, tipo, tamanho, se é anulável ou não, etc.. 
+
+Obs: Se fizer alterações, guarde bem essas migrations. 
 
 
 #### Aplicar migration no banco de dados / Criar ou Atualizar (se já existir):
