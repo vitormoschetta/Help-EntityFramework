@@ -117,6 +117,46 @@ dotnet tool install --global dotnet-ef
 dotnet ef migrations add <Nome_Migration_sua_preferencia>
 
 ```
+Obs: Você pode editar as migrations antes de executar o próximo passo.
+Verifique os arquivos: 
+  '<nome_migration>.Designer.cs
+  'AppDbContextModelSnapshot.cs'
+  
+Eles são identicos, exceto no fato de que o 'AppDbContextModelSnapshot' cumula todas as Migrations adicionadas. 
+Eles terão um codigo parecido com o exemplo abaixo:
+
+```
+protected override void BuildModel(ModelBuilder modelBuilder)
+{
+    modelBuilder
+        .HasAnnotation("ProductVersion", "3.1.4")
+        .HasAnnotation("Relational:MaxIdentifierLength", 128)
+        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+    modelBuilder.Entity("DefaultDDDProject.Domain.Entities.Product", b =>
+        {
+            b.Property<Guid>("Id")
+                .ValueGeneratedOnAdd()
+                .HasColumnType("uniqueidentifier");
+
+            b.Property<DateTime?>("Expiration")
+                .HasColumnType("datetime");
+
+            b.Property<string>("Nome")
+                .HasColumnType("nvarchar(100)")
+                .IsRequired();
+
+            b.Property<decimal?>("Price")
+                .HasColumnType("decimal(10,2)");
+
+            b.HasKey("Id");
+
+            b.ToTable("Product");
+        });
+}
+```
+Esses arquivos contém justamente as configurações das propriedades que irão constituir a Tabela do Banco de Dados. 
+
 
 #### Aplicar migration no banco de dados / Criar ou Atualizar (se já existir):
 
