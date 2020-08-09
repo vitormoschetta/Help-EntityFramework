@@ -181,6 +181,8 @@ migrationBuilder.RenameColumn(
     newName: "FullName");
 ```
 
+[Consulte a documentação oficial](https://docs.microsoft.com/pt-br/ef/core/managing-schemas/migrations/managing?tabs=dotnet-core-cli) para saber mais sobre mudança de nomes em bd existentes.
+
 #### Aplicar migration no banco de dados / Criar ou Atualizar (se já existir):
 
 ```
