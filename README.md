@@ -159,6 +159,27 @@ Esses arquivos contém justamente as configurações das propriedades que irão 
 
 Obs: Se fizer alterações, guarde bem essas migrations. 
 
+#### Renomear coluna de uma Tabela:
+
+###### O Entity te dará isso:
+```
+migrationBuilder.DropColumn(
+    name: "Name",
+    table: "Customers");
+
+migrationBuilder.AddColumn<string>(
+    name: "FullName",
+    table: "Customers",
+    nullable: true);
+
+```
+###### Corrija para isso:
+```
+migrationBuilder.RenameColumn(
+    name: "Name",
+    table: "Customers",
+    newName: "FullName");
+```
 
 #### Aplicar migration no banco de dados / Criar ou Atualizar (se já existir):
 
