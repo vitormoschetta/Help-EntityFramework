@@ -114,7 +114,7 @@ dotnet tool install --global dotnet-ef
 #### Gerar Migration :
 
 ```
-dotnet ef migrations add <Nome_Migration_sua_preferencia>
+dotnet ef migrations add <Nome_Migration_sua_preferencia> -o Data/Migrations
 
 ```
 Obs: Você pode editar as migrations antes de executar o próximo passo.
