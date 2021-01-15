@@ -1,8 +1,6 @@
-## Ajuda Entity Framework Core
+# Entity Framework Core
 
-#### Adicionar EF Core a um projeto existente
-
-###### Add Pacotes via CLI:
+## Pacotes via CLI:
 
 ```
 dotnet add package Microsoft.EntityFrameworkCore.Tools --version 3.1.*
@@ -14,9 +12,9 @@ dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 3.1.*
 
 ```
 
-#### Configurar Arquivo 'appsettings.json'
+## Configurar Arquivo 'appsettings.json'
 
-###### Sql Server LocalDb:
+#### Sql Server LocalDb:
 
 ```
 {
@@ -35,7 +33,7 @@ dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 3.1.*
 
 ```
 
-###### Sql Server / MySql / MariaDB :
+#### Sql Server / MySql / MariaDB :
 
 ```
 {
@@ -55,16 +53,64 @@ dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 3.1.*
 ```
 
 
-#### Criar / Configurar Contexto:
+## Criar / Configurar Contexto:
 
+#### Deixar Mapeamento por conta do EF:
 ```
 public class Contexto: DbContext
 {
      public Contexto(DbContextOptions<Contexto> options) : base(options)
-    {
-    }
+    { }
+    
     public DbSet<Produto> Produto { get; set; }
 }
+```
+
+#### Configurar Mapeamento:
+```
+public class Contexto: DbContext
+{
+    public Contexto(DbContextOptions<Contexto> options) : base(options)
+    { }
+    
+    public DbSet<Equipe> Equipe { get; set; }       
+    
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        builder.ApplyConfiguration(new EquipeMap());                      
+    }    
+}
+
+public class EquipeMap : IEntityTypeConfiguration<Equipe>
+    {
+        public void Configure(EntityTypeBuilder<Equipe> builder)
+        {
+            builder.ToTable("Equipe");                              
+
+            builder.Property(x => x.Nome)
+                .IsRequired()
+                .HasMaxLength(100)
+                .HasColumnType("varchar(100)");
+
+            builder.Property(x => x.Ano)
+                .IsRequired()
+                .HasMaxLength(4)
+                .HasColumnType("char(4)");
+            
+            builder.Property(x => x.EscolaInep)
+                .IsRequired()                
+                .HasMaxLength(8)
+                .HasColumnType("char(8)");        
+
+            builder.HasOne(x => x.Modalidade);  // <-- tem uma Modalidade
+
+            builder.HasMany(x => x.EstudantesEquipe);  // <-- tem muitos EstudantesEquipe         
+
+            builder.HasIndex(x => x.EscolaInep); // <-- cria um indice para melhorar pesquisa de Equipes pelo INEP da Escola
+
+            builder.HasKey(x => x.Id);  // <-- define Primary Key
+        }
+    }
 ```
 
 
@@ -85,7 +131,7 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 
-#### Configurar a injeção de dependência no Controller
+#### Controller - Construtor
 
 ```
 public class LivrosController : Controller
